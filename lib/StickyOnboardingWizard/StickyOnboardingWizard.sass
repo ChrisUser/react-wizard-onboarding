@@ -1,0 +1,101 @@
+@import '../styles/_variables'
+@import '../styles/_mixins'
+
+.rwo-onboarding-wizard-wrapper
+    position: absolute
+
+    .rwo-sticky-onboarding-modal
+        z-index: 1
+        +flexbox(flex-start, flex-start, column, nowrap)
+        border-radius: $main-border-radius
+        position: relative
+        width: 96%
+        max-width: 200px
+        transition: transform 0.250s cubic-bezier(0.6, 0.4, 0, 1)
+
+        &__header,
+        &__footer
+            padding: $small-space
+
+        &__header,
+        &__body,
+        &__footer
+            position: relative
+            width: 100%
+
+        &__header
+            +flexbox(space-between, center, row, nowrap)
+
+            &__left-section
+                +flexbox(flex-start, center, row, wrap)
+        
+            &__right-section
+                +flexbox(flex-end, center, row, wrap)
+
+        &__body
+            +flexbox(flex-start, flex-start, column, nowrap)
+
+            &__text-container
+                color: inherit
+                +flexbox(flex-start, flex-start, column, nowrap)
+                padding: 0 $small-space
+                width: 100%
+                max-height: $large-space*8
+                overflow-y: auto
+                letter-spacing: .3px
+                line-height: 160%
+                font-size: .9rem
+
+        &__footer
+            +flexbox(space-between, center, row, nowrap)
+
+    .Top--position-modal,
+    .Bottom--position-modal,
+    .Left--position-modal,
+    .Right--position-modal
+        &::before
+            position: absolute
+            +square(0)
+            content: ''
+
+    .Top--position-modal,
+    .Bottom--position-modal
+        &::before
+            left: calc(50% - $small-space)
+
+    .Left--position-modal,
+    .Right--position-modal
+        &::before
+            top: calc(50% - $small-space)
+
+    .Top--position-modal
+        &::before
+            bottom: $small-space*(-.65)
+            border-left: $small-space solid transparent
+            border-top: $small-space*1.2 solid
+            border-top-color: inherit
+            border-right: $small-space solid transparent
+
+    .Bottom--position-modal
+        &::before
+            top: $small-space*(-.65)
+            border-left: $small-space solid transparent
+            border-bottom: $small-space*1.2 solid
+            border-bottom-color: inherit
+            border-right: $small-space solid transparent
+
+    .Left--position-modal
+        &::before
+            right: $small-space*(-.65)
+            border-top: $small-space solid transparent
+            border-left: $small-space*1.2 solid
+            border-left-color: inherit
+            border-bottom: $small-space solid transparent
+
+    .Right--position-modal
+        &::before
+            left: $small-space*(-.65)
+            border-top: $small-space solid transparent
+            border-right: $small-space*1.2 solid
+            border-right-color: inherit
+            border-bottom: $small-space solid transparent

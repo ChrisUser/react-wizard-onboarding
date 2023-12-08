@@ -1,0 +1,92 @@
+@import './_variables'
+@import './_mixins'
+
+.rwo-onboarding-wizard-wrapper
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  z-index: 10001
+
+  *
+    box-sizing: border-box
+
+.rwo-ghost-action-button
+  -moz-appearance: none
+  -webkit-appearance: none
+  -ms-progress-appearance: none
+  cursor: pointer
+  border: 0
+  background: transparent
+  +flexbox(center, center, row, nowrap)
+  padding: $small-space*.5
+  font-size: .9rem
+  font-weight: 400
+  letter-spacing: .3px
+  border-radius: $main-border-radius
+  transition: background-color 250ms ease-out
+
+.rwo-modal-title
+  font-size: 1rem
+  font-weight: bold
+  letter-spacing: .2px
+  line-height: 100%
+
+.rwo-modal-step-counter
+  +flexbox(flex-start, flex-start, row, nowrap)
+  white-space: nowrap
+  opacity: .64
+  margin-left: $small-space
+  font-size: .84rem
+  font-weight: bold
+
+// Light modal style
+
+.light-modal .rwo-onboarding-modal
+  &__header,
+  &__footer
+    border-color: $dark-divider-color
+
+.light-modal
+  background-color: $white
+  color: $black
+
+  .rwo-onboarding-modal-step-dot:not(.is-active)
+    background-color: $dark-divider-color
+
+  .rwo-ghost-action-button
+    color: $dark-accent-color
+
+    &:hover
+      background: rgba($black, .07)
+
+  .is-active
+      background-color: $dark-accent-color
+
+// Dark modal style
+
+.dark-modal .rwo-onboarding-modal
+  &__header,
+  &__footer
+    border-color: $light-divider-color
+
+  &__body
+    &__text-container
+      color: rgba($white, .88)
+
+.dark-modal
+  background-color: $black
+  border-color: $black
+  color: $white
+
+  .rwo-onboarding-modal-step-dot:not(.is-active)
+    background-color: $light-divider-color
+
+  .rwo-ghost-action-button
+    color: $light-accent-color
+
+    &:hover
+      background: rgba($white, .14)
+
+  .is-active
+    background-color: $light-accent-color

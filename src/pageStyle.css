@@ -1,0 +1,119 @@
+:root {
+    --light-bg-color: #edeff6;
+    --darker-bg-color: #d2dcff;
+    --darkest-bg-color: #9cb3ff;
+    --border-radius: 0.45rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flexbox {
+    display: flex;
+}
+
+.main-container {
+    position: relative;
+}
+
+.main-container,
+.sidebar,
+.sidebar__routes-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.sidebar {
+    position: fixed;
+    min-width: 8rem;
+    height: 100%;
+    padding: 6rem 2rem 2rem;
+    background: var(--darkest-bg-color);
+    border-right: 1px solid var(--darker-bg-color);
+}
+.sidebar__routes-container {
+    gap: 1.2rem;
+}
+.sidebar__routes-container__route-element {
+    align-self: stretch;
+    padding: 0.85rem 2rem;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    letter-spacing: 0.022rem;
+    line-height: 100%;
+    cursor: pointer;
+    transition: background-color 150ms linear 50ms;
+}
+.sidebar__routes-container__route-element.active-route,
+.sidebar__routes-container__route-element:hover {
+    background-color: var(--darker-bg-color);
+}
+
+.header {
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    width: 100%;
+    height: 4rem;
+    background: var(--darkest-bg-color);
+    border-bottom: 1px solid var(--darker-bg-color);
+}
+.header__left-section,
+.header__middle-section,
+.header__right-section {
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-logo-container {
+    cursor: default;
+    width: 9.2rem;
+    height: 2.5rem;
+    border-radius: var(--border-radius);
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.header__left-section,
+.header__middle-section {
+    justify-content: center;
+}
+
+.header__middle-section {
+    width: 50%;
+    max-width: 24rem;
+    min-width: 9rem;
+}
+
+.search-bar {
+    cursor: text;
+    align-items: center;
+    border: 1px solid var(--darker-bg-color);
+    border-radius: var(--border-radius);
+    color: var(--darkest-bg-color);
+    background-color: var(--darker-bg-color);
+    padding: 0 1rem;
+    width: 100%;
+    height: 2.5rem;
+}
+
+.header__right-section {
+    justify-content: flex-end;
+}
+
+.page-content {
+    margin: 64px 0 0 210px;
+    padding: 24px;
+    background-color: var(--light-bg-color);
+}

@@ -1,0 +1,81 @@
+@import '../styles/_variables'
+@import '../styles/_mixins'
+
+.rwo-onboarding-wizard-wrapper
+    position: fixed
+    +flexbox(center, center, column, nowrap)
+
+.rwo-onboarding-modal
+    +flexbox(flex-start, flex-start, column, nowrap)
+    border-radius: $main-border-radius
+    position: relative
+    width: 96%
+    max-width: 700px
+
+    &__header,
+    &__footer
+        padding: $small-space
+
+    &__header,
+    &__body,
+    &__footer
+        position: relative
+        width: 100%
+
+    &__header
+        +flexbox(space-between, center, row, nowrap)
+        border-bottom: 1px solid
+
+        &__left-section,
+        &__right-section
+            min-width: $large-space
+
+        &__left-section
+             +flexbox(flex-start, center, row, wrap)
+        
+        &__right-section
+             +flexbox(flex-end, center, row, wrap)
+
+    &__body
+        +flexbox(flex-start, flex-start, column, nowrap)
+
+        &__image-container
+            +flexbox(center, center, column, nowrap)
+            max-height: $large-space*4
+            overflow: hidden
+
+            img
+                position: relative
+                width: 100%
+
+        &__text-container
+            color: inherit
+            +flexbox(center, center, column, nowrap)
+            padding: $small-space $medium-space
+            text-align: center
+            width: 100%
+            letter-spacing: .3px
+            line-height: 160%
+
+    &__footer
+        +flexbox(center, center, column, nowrap)
+        border-top: 1px solid
+
+        .rwo-onboarding-modal-step-dot-container
+            +flexbox(center, center, row, nowrap)
+            gap: $small-space*.8
+
+            .is-active
+                cursor: default
+                pointer-events: none
+
+            .rwo-onboarding-modal-step-dot
+                opacity: .6
+                cursor: pointer
+                max-width: $small-space*.55
+                +square($small-space*.55)
+                border-radius: 50%
+                transition: opacity 150ms ease-in-out, background-color 250ms ease-in-out
+
+                &:hover
+                    opacity: 1

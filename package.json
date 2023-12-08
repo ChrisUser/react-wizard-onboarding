@@ -1,0 +1,36 @@
+{
+    "name": "react-wizard-onboarding",
+    "version": "1.0.0",
+    "description": "Pretty fancy onboarding wizard for your website, made in React.",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc --p ./tsconfig-build.json && vite build",
+        "test": "react-scripts test",
+        "prepublishOnly": "npm run build"
+    },
+    "type": "module",
+    "main": "dist/main.js",
+    "types": "dist/main.d.ts",
+    "files": [
+        "dist"
+    ],
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "license": "MIT",
+    "devDependencies": {
+        "@types/react": "^18.2.31",
+        "@types/react-dom": "^18.2.14",
+        "@vitejs/plugin-react": "^4.1.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "sass": "^1.69.4",
+        "typescript": "^5.2.2",
+        "vite": "^4.5.0",
+        "vite-plugin-dts": "^3.6.0"
+    },
+    "peerDependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    }
+}

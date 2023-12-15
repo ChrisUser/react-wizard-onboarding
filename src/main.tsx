@@ -89,7 +89,23 @@ const App = () => {
                 </div>
             </div>
             <div className="flexbox header">
-                <div className="flexbox header__left-section main-logo-container">LOGO</div>
+                <div className="flexbox header__left-section">
+                    <div className="flexbox main-logo-container">L</div>
+                    <div className="flexbox header-links-container">
+                        <a className="header-links-container__header-link active-link" href="#">
+                            Overview
+                        </a>
+                        <a className="header-links-container__header-link" href="#">
+                            Products
+                        </a>
+                        <a className="header-links-container__header-link" href="#">
+                            Customers
+                        </a>
+                        <a className="header-links-container__header-link" href="#">
+                            Settings
+                        </a>
+                    </div>
+                </div>
                 <div className="flexbox header__middle-section">
                     <div className="flexbox search-bar">Search ...</div>
                 </div>

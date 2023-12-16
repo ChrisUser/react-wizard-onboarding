@@ -96,20 +96,19 @@ const App = () => {
                             Overview
                         </a>
                         <a className="header-links-container__header-link" href="#">
-                            Products
+                            Projects
                         </a>
                         <a className="header-links-container__header-link" href="#">
-                            Customers
+                            Tasks
                         </a>
                         <a className="header-links-container__header-link" href="#">
                             Settings
                         </a>
                     </div>
                 </div>
-                <div className="flexbox header__middle-section">
-                    <div className="flexbox search-bar">Search ...</div>
+                <div className="flexbox header__right-section">
+                    <input type="text" className="appearance-none flexbox search-bar" placeholder="Search..." />
                 </div>
-                <div className="flexbox header__right-section"></div>
             </div>
             <div className="page-content">
                 <h1 style={{ fontSize: '4em' }}>Hello world!</h1>

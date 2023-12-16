@@ -2,7 +2,7 @@
     --light-bg-color: #edeff6;
     --darker-bg-color: #d2dcff;
     --darkest-bg-color: #9cb3ff;
-    --border-radius: 0.45rem;
+    --border-radius: 0.4rem;
 }
 
 body {
@@ -12,6 +12,14 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--light-bg-color);
+}
+
+.appearance-none {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-progress-appearance: none;
 }
 
 .flexbox {
@@ -59,13 +67,15 @@ body {
 
 .header {
     position: fixed;
+    left: 0;
+    right: 0;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
-    width: 100%;
     height: 4rem;
     background: white;
     border-bottom: 1px solid var(--darker-bg-color);
+    box-shadow: 0px 7px 10px -3px rgba(156, 179, 255, 0.14);
 }
 .header__left-section,
 .header__middle-section,
@@ -120,15 +130,15 @@ body {
 }
 
 .search-bar {
-    cursor: text;
+    width: 14rem;
     align-items: center;
     border: 1px solid var(--darker-bg-color);
     border-radius: var(--border-radius);
     color: var(--darkest-bg-color);
-    background-color: var(--darker-bg-color);
-    padding: 0 1rem;
-    width: 100%;
-    height: 2.5rem;
+    background: white;
+    font-size: 1rem;
+    padding: 0 0.6rem;
+    height: 2.3rem;
 }
 
 .header__right-section {

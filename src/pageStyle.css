@@ -30,39 +30,30 @@ body {
     position: relative;
 }
 
-.main-container,
-.sidebar,
-.sidebar__routes-container {
+.main-container {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
-.sidebar {
-    position: fixed;
-    min-width: 8rem;
-    height: 100%;
-    padding: 6rem 2rem 2rem;
-    background: var(--darkest-bg-color);
-    border-right: 1px solid var(--darker-bg-color);
-}
-.sidebar__routes-container {
-    gap: 1.2rem;
-}
-.sidebar__routes-container__route-element {
-    align-self: stretch;
-    padding: 0.85rem 2rem;
-    background-color: rgba(0, 0, 0, 0);
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    letter-spacing: 0.022rem;
-    line-height: 100%;
+.icon-container {
     cursor: pointer;
-    transition: background-color 150ms linear 50ms;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
 }
-.sidebar__routes-container__route-element.active-route,
-.sidebar__routes-container__route-element:hover {
-    background-color: var(--darker-bg-color);
+
+.icon-container:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.icon {
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+    color: var(--darkest-bg-color);
 }
 
 .header {
@@ -139,10 +130,50 @@ body {
     font-size: 1rem;
     padding: 0 0.6rem;
     height: 2.3rem;
+    box-shadow: 0px 5px 16px -3px rgba(0, 0, 0, 0.1);
+}
+
+.current-user-box {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.4rem 0.5rem 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.current-user-box:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.current-user-name {
+    font-size: 0.88rem;
+    line-height: 1;
+    letter-spacing: 0.3px;
+    font-weight: 500;
+}
+
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #fff;
+}
+
+.avatar-container__image {
+    position: relative;
+    height: 100%;
 }
 
 .header__right-section {
     justify-content: flex-end;
+    gap: 1rem;
 }
 
 .page-content {

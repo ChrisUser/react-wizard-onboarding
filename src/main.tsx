@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
 import ReactDOM from 'react-dom/client'
-import { OnboardingStepSpotlight, StickyOnboardingWizard } from '../lib/main'
 import '../dist/style.css'
 import './pageStyle.css'
+import { Notifications } from './Icons/notifications'
 
 const onboardingSteps = [
     {
@@ -15,29 +15,6 @@ const onboardingSteps = [
     {
         text: 'ok prova 3 testo test',
         image: 'https://time.com/wp-content/uploads/2017/10/229-westerlund-21.jpg?w=2000'
-    }
-]
-
-const routes = [
-    {
-        id: 0,
-        label: 'Homepage'
-    },
-    {
-        id: 1,
-        label: 'Products'
-    },
-    {
-        id: 2,
-        label: 'Orders'
-    },
-    {
-        id: 3,
-        label: 'Sales'
-    },
-    {
-        id: 4,
-        label: 'Settings'
     }
 ]
 
@@ -78,16 +55,6 @@ const App = () => {
             /> */}
             {/* <StickyOnboardingWizard bounds={bounds} darkMode onboardingSteps={onboardingSteps} onStepChange={(newStep) => getBounds(newStep)} /> */}
             {/* <OnboardingStepSpotlight bounds={bounds} targetRef={targetElementRef} onFocusAnimationEnd={() => console.log('trigger ###')} /> */}
-
-            <div className="flexbox sidebar">
-                <div className="flexbox sidebar__routes-container">
-                    {routes.map((route) => (
-                        <div className="flexbox sidebar__routes-container__route-element" key={route.id}>
-                            {route.label}
-                        </div>
-                    ))}
-                </div>
-            </div>
             <div className="flexbox header">
                 <div className="flexbox header__left-section">
                     <div className="flexbox main-logo-container">L</div>
@@ -108,6 +75,15 @@ const App = () => {
                 </div>
                 <div className="flexbox header__right-section">
                     <input type="text" className="appearance-none flexbox search-bar" placeholder="Search..." />
+                    <div className="flexbox icon-container">
+                        <Notifications className="icon" />
+                    </div>
+                    <div className="current-user-box">
+                        <span className="current-user-name">Mike Hawkings</span>
+                        <div className="avatar-container">
+                            <img className="avatar-container__image" src="https://ui.shadcn.com/avatars/04.png" alt="Avatar" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="page-content">

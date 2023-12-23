@@ -1,5 +1,5 @@
 :root {
-    --light-bg-color: #edeff6;
+    --light-bg-color: #f3f4f8;
     --darker-bg-color: #d2dcff;
     --darkest-bg-color: #9cb3ff;
     --border-radius: 0.4rem;
@@ -39,7 +39,7 @@ body {
 .icon-container {
     cursor: pointer;
     padding: 0.4rem;
-    border-radius: 0.4rem;
+    border-radius: var(--border-radius);
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0);
@@ -56,6 +56,17 @@ body {
     color: var(--darkest-bg-color);
 }
 
+.notification-circle {
+    position: absolute;
+    margin-left: 0.8rem;
+    margin-bottom: 0.8rem;
+    height: 0.5rem;
+    width: 0.5rem;
+    background-color: var(--darkest-bg-color);
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
 .header {
     position: fixed;
     left: 0;
@@ -66,7 +77,7 @@ body {
     height: 4rem;
     background: white;
     border-bottom: 1px solid var(--darker-bg-color);
-    box-shadow: 0px 7px 10px -3px rgba(156, 179, 255, 0.14);
+    box-shadow: 0px 3px 5px -3px rgba(156, 179, 255, 0.14);
 }
 .header__left-section,
 .header__middle-section,
@@ -140,7 +151,7 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 0.4rem 0.5rem 0.4rem 0.8rem;
-    border-radius: 0.4rem;
+    border-radius: var(--border-radius);
     background-color: rgba(0, 0, 0, 0.03);
 }
 
@@ -177,7 +188,8 @@ body {
 }
 
 .page-content {
-    margin: 64px 0 0 210px;
-    padding: 24px;
+    height: calc(100vh - 8rem);
+    margin-top: 4rem;
+    padding: 2rem;
     background-color: var(--light-bg-color);
 }

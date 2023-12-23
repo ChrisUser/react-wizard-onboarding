@@ -76,6 +76,7 @@ const App = () => {
                 <div className="flexbox header__right-section">
                     <input type="text" className="appearance-none flexbox search-bar" placeholder="Search..." />
                     <div className="flexbox icon-container">
+                        <div className="notification-circle" />
                         <Notifications className="icon" />
                     </div>
                     <div className="current-user-box">
@@ -87,7 +88,11 @@ const App = () => {
                 </div>
             </div>
             <div className="page-content">
-                <h1 style={{ fontSize: '4em' }}>Hello world!</h1>
+                <div className="tabs-selector">
+                    <div className="tabs-selector__tab selected-tab">Sales</div>
+                    <div className="tabs-selector__tab">Orders</div>
+                    <div className="tabs-selector__tab">Customers</div>
+                </div>
             </div>
 
             {/* <div

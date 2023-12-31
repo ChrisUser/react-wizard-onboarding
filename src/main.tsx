@@ -88,7 +88,7 @@ const App = () => {
                 </div>
             </div>
             <div className="page-content">
-                <div className="tabs-selector">
+                <div className="flexbox tabs-selector">
                     <div className="tabs-selector__tab selected-tab">Sales</div>
                     <div className="tabs-selector__tab">Orders</div>
                     <div className="tabs-selector__tab">Customers</div>

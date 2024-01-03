@@ -1,19 +1,20 @@
-import { jsx as e, jsxs as m } from "react/jsx-runtime";
-import { useCallback as S, useEffect as C, useState as O, useRef as D, useMemo as $ } from "react";
-const H = ({ bounds: t, targetRef: a, beforeFocusAnimationEnd: l, onFocusAnimationEnd: c }) => {
-  const g = S(() => {
-    var w;
+import { jsx as i, jsxs as m } from "react/jsx-runtime";
+import { useCallback as B, useEffect as O, useState as S, useRef as H, useMemo as z } from "react";
+const L = ({ bounds: t, focusedElement: r, beforeFocusAnimationEnd: l, onFocusAnimationEnd: c }) => {
+  const w = B(() => {
     if (l && l(), t.height === 0 || t.width === 0)
       return;
-    t.bottom > window.innerHeight && (a != null && a.current) && ((w = a.current) == null || w.scrollIntoView({ behavior: "smooth" }));
-    const u = setTimeout(() => {
+    t.bottom > window.innerHeight && r && (r == null || r.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" }));
+    const p = setTimeout(() => {
       c && c();
     }, 500);
-    return () => clearTimeout(u);
-  }, [t, a, c, l]);
-  return C(() => {
-    g();
-  }, [g]), /* @__PURE__ */ e("div", { "data-testid": "spotlight-wrapper", className: "rwo-onboarding-step-spotlight-wrapper", children: /* @__PURE__ */ e(
+    return () => clearTimeout(p);
+  }, [t, r, c, l]);
+  return O(() => {
+    w();
+  }, [w]), O(() => (document.body.style.overflow = "hidden", () => {
+    document.body.style.overflow = "";
+  }), []), console.log("bounds", t), /* @__PURE__ */ i("div", { "data-testid": "spotlight-wrapper", className: "rwo-onboarding-step-spotlight-wrapper", children: /* @__PURE__ */ i(
     "div",
     {
       "data-testid": "spotlight",
@@ -21,135 +22,135 @@ const H = ({ bounds: t, targetRef: a, beforeFocusAnimationEnd: l, onFocusAnimati
       style: { width: t.width, height: t.height, transform: `translate3d(${t.x}px, ${t.y}px, 0px)` }
     }
   ) });
-}, V = H;
-const M = ({
+}, V = L;
+const D = ({
   onboardingSteps: t,
-  modalTitle: a = "Tutorial",
+  modalTitle: r = "Tutorial",
   displayDots: l,
   darkMode: c,
-  nextButtonLabel: g = "Next",
-  nextButtonIcon: u,
-  closeButtonLabel: w = "Close",
+  nextButtonLabel: w = "Next",
+  nextButtonIcon: p,
+  closeButtonLabel: v = "Close",
   closeButtonIcon: f,
   completeButtonLabel: y = "Done",
   completeButtonIcon: k,
   onStepChange: s,
   onClose: _,
-  onComplete: x
+  onComplete: b
 }) => {
-  const [i, v] = O(0), h = S(() => {
-    _ && _(i);
-  }, [i, _]);
+  const [o, u] = S(0), h = B(() => {
+    _ && _(o);
+  }, [o, _]);
   if (!(!t || t.length === 0))
-    return /* @__PURE__ */ e("div", { className: "rwo-onboarding-wizard-wrapper", children: /* @__PURE__ */ m("div", { "data-testid": "wizard", className: `rwo-onboarding-modal ${c ? "dark" : "light"}-modal`, children: [
+    return /* @__PURE__ */ i("div", { className: "rwo-onboarding-wizard-wrapper rwo-fixed-onboarding-wizard", children: /* @__PURE__ */ m("div", { "data-testid": "wizard", className: `rwo-onboarding-modal ${c ? "dark" : "light"}-modal`, children: [
       /* @__PURE__ */ m("div", { className: "rwo-onboarding-modal__header", children: [
-        /* @__PURE__ */ e("div", { className: "rwo-onboarding-modal__header__left-section", children: /* @__PURE__ */ e("button", { className: "rwo-ghost-action-button", onClick: h, children: f || w }) }),
-        /* @__PURE__ */ e("div", { className: "rwo-onboarding-modal__header__middle-section", children: /* @__PURE__ */ e("span", { className: "rwo-modal-title", children: a }) }),
-        /* @__PURE__ */ e("div", { className: "rwo-onboarding-modal__header__right-section", children: i === t.length - 1 ? /* @__PURE__ */ e("button", { className: "rwo-ghost-action-button", onClick: () => x ? x() : null, children: k || y }) : /* @__PURE__ */ e(
+        /* @__PURE__ */ i("div", { className: "rwo-onboarding-modal__header__left-section", children: /* @__PURE__ */ i("button", { className: "rwo-ghost-action-button", onClick: h, children: f || v }) }),
+        /* @__PURE__ */ i("div", { className: "rwo-onboarding-modal__header__middle-section", children: /* @__PURE__ */ i("span", { className: "rwo-modal-title", children: r }) }),
+        /* @__PURE__ */ i("div", { className: "rwo-onboarding-modal__header__right-section", children: o === t.length - 1 ? /* @__PURE__ */ i("button", { className: "rwo-ghost-action-button", onClick: () => b ? b() : null, children: k || y }) : /* @__PURE__ */ i(
           "button",
           {
             className: "rwo-ghost-action-button",
             onClick: () => {
-              const N = i + 1;
-              v(N), s && s(N);
+              const x = o + 1;
+              u(x), s && s(x);
             },
-            children: u || g
+            children: p || w
           }
         ) })
       ] }),
       /* @__PURE__ */ m("div", { className: "rwo-onboarding-modal__body", children: [
-        t[i].image && /* @__PURE__ */ e("div", { className: "rwo-onboarding-modal__body__image-container", children: /* @__PURE__ */ e("img", { src: t[i].image, alt: t[i].text }) }),
-        /* @__PURE__ */ e("div", { className: "rwo-onboarding-modal__body__text-container", children: t[i].text })
+        t[o].image && /* @__PURE__ */ i("div", { className: "rwo-onboarding-modal__body__image-container", children: /* @__PURE__ */ i("img", { src: t[o].image, alt: t[o].text }) }),
+        /* @__PURE__ */ i("div", { className: "rwo-onboarding-modal__body__text-container", children: t[o].text })
       ] }),
-      l && /* @__PURE__ */ e("div", { className: "rwo-onboarding-modal__footer", children: /* @__PURE__ */ e("div", { className: "rwo-onboarding-modal-step-dot-container", children: t.map((N, o) => /* @__PURE__ */ e(
+      l && /* @__PURE__ */ i("div", { className: "rwo-onboarding-modal__footer", children: /* @__PURE__ */ i("div", { className: "rwo-onboarding-modal-step-dot-container", children: t.map((x, a) => /* @__PURE__ */ i(
         "div",
         {
-          className: `rwo-onboarding-modal-step-dot ${i === o ? "is-active" : ""}`,
+          className: `rwo-onboarding-modal-step-dot ${o === a ? "is-active" : ""}`,
           onClick: () => {
-            v(o), s && s(o);
+            u(a), s && s(a);
           }
         },
-        o
+        a
       )) }) })
     ] }) });
-}, q = M;
-var r = /* @__PURE__ */ ((t) => (t.Top = "Top", t.Bottom = "Bottom", t.Left = "Left", t.Right = "Right", t.Center = "Center", t))(r || {});
-const d = 12, R = ({
+}, q = D;
+var e = /* @__PURE__ */ ((t) => (t.Top = "Top", t.Bottom = "Bottom", t.Left = "Left", t.Right = "Right", t.Center = "Center", t))(e || {});
+const d = 12, M = ({
   bounds: t,
-  onboardingSteps: a,
+  onboardingSteps: r,
   modalTitle: l = "Tutorial",
   darkMode: c,
-  nextButtonLabel: g = "Next",
-  nextButtonIcon: u,
-  closeButtonLabel: w = "Close",
+  nextButtonLabel: w = "Next",
+  nextButtonIcon: p,
+  closeButtonLabel: v = "Close",
   closeButtonIcon: f,
   completeButtonLabel: y = "Done",
   completeButtonIcon: k,
   onStepChange: s,
   onClose: _,
-  onComplete: x
+  onComplete: b
 }) => {
-  const [i, v] = O(new DOMRect()), [h, N] = O(0), o = D(null), b = $(() => a, [a]);
-  C(() => {
-    !o || !o.current || v(o.current.getBoundingClientRect());
-  }, [t.x, t.y, t.width, t.height, o.current]);
-  const z = $(() => {
-    const n = window.innerWidth - (t.x + t.width), p = window.innerHeight - (t.y + t.height);
-    return i.height + d <= t.y ? r.Top : i.width + d <= t.x ? r.Left : i.width + d <= n ? r.Right : i.height + d <= p ? r.Bottom : r.Center;
-  }, [i, t]), W = $(() => {
-    const { x: n, y: p, width: B, height: I } = t, { width: T, height: L } = i;
-    switch (z) {
-      case r.Top:
-        return `translate3d(${n || 0}px, ${Math.abs(p - L - d)}px, 0px)`;
-      case r.Left:
-        return `translate3d(${Math.abs(n - T - d)}px, ${p || 0}px, 0px)`;
-      case r.Right:
-        return `translate3d(${n + B + d}px, ${p || 0}px, 0px)`;
-      case r.Bottom:
-        return `translate3d(${n || 0}px, ${p + I + d}px, 0px)`;
-      case r.Center:
+  const [o, u] = S(new DOMRect()), [h, x] = S(0), a = H(null), N = z(() => r, [r]);
+  O(() => {
+    !a || !a.current || u(a.current.getBoundingClientRect());
+  }, [t.x, t.y, t.width, t.height, a.current]);
+  const W = z(() => {
+    const n = window.innerWidth - (t.x + t.width), g = window.innerHeight - (t.y + t.height);
+    return console.log("remainigspace right, below", n, g), console.log("modalBounds.height", o.height), console.log("modalBounds.width", o.width), console.log("window.innerHeight", window.innerHeight), console.log("window.innerWidth", window.innerWidth), o.height + d <= t.y ? e.Top : o.width + d <= t.x ? e.Left : o.width + d <= n ? e.Right : o.height + d <= g ? e.Bottom : e.Center;
+  }, [o, t]), C = z(() => {
+    const { x: n, y: g, width: $, height: R } = t, { width: I, height: T } = o;
+    switch (console.log("getmodalcoordinates width", $), W) {
+      case e.Top:
+        return `translate3d(${$ * 0.5 + n || 0}px, ${Math.abs(g - T - d)}px, 0px)`;
+      case e.Left:
+        return `translate3d(${Math.abs(n - I - d)}px, ${g || 0}px, 0px)`;
+      case e.Right:
+        return `translate3d(${n + $ + d}px, ${g || 0}px, 0px)`;
+      case e.Bottom:
+        return `translate3d(${n || 0}px, ${g + R + d}px, 0px)`;
+      case e.Center:
       default:
         return "translate3d(50vw, 50vh, 0px)";
     }
-  }, [i, t]);
-  if (!(!b || b.length === 0))
-    return /* @__PURE__ */ e("div", { className: "rwo-onboarding-wizard-wrapper", children: /* @__PURE__ */ m(
+  }, [o, t]);
+  if (!(!N || N.length === 0))
+    return /* @__PURE__ */ i("div", { className: "rwo-onboarding-wizard-wrapper rwo-sticky-onboarding-wizard", children: /* @__PURE__ */ m(
       "div",
       {
         role: "dialog",
-        className: `rwo-sticky-onboarding-modal ${c ? "dark" : "light"}-modal ${z}--position-modal`,
-        ref: o,
+        className: `rwo-sticky-onboarding-modal ${c ? "dark" : "light"}-modal ${W}--position-modal`,
+        ref: a,
         style: {
-          transform: W
+          transform: C
         },
         children: [
           /* @__PURE__ */ m("div", { className: "rwo-sticky-onboarding-modal__header", children: [
-            /* @__PURE__ */ e("div", { className: "rwo-sticky-onboarding-modal__header__left-section", children: /* @__PURE__ */ e("span", { className: "rwo-modal-title", children: l }) }),
-            /* @__PURE__ */ e("div", { className: "rwo-sticky-onboarding-modal__header__right-section", children: /* @__PURE__ */ m("span", { className: "rwo-modal-step-counter", children: [
+            /* @__PURE__ */ i("div", { className: "rwo-sticky-onboarding-modal__header__left-section", children: /* @__PURE__ */ i("span", { className: "rwo-modal-title", children: l }) }),
+            /* @__PURE__ */ i("div", { className: "rwo-sticky-onboarding-modal__header__right-section", children: /* @__PURE__ */ m("span", { className: "rwo-modal-step-counter", children: [
               h + 1,
               " / ",
-              b.length
+              N.length
             ] }) })
           ] }),
-          /* @__PURE__ */ e("div", { className: "rwo-sticky-onboarding-modal__body", children: /* @__PURE__ */ e("div", { className: "rwo-sticky-onboarding-modal__body__text-container", children: b[h].text }) }),
+          /* @__PURE__ */ i("div", { className: "rwo-sticky-onboarding-modal__body", children: /* @__PURE__ */ i("div", { className: "rwo-sticky-onboarding-modal__body__text-container", children: N[h].text }) }),
           /* @__PURE__ */ m("div", { className: "rwo-sticky-onboarding-modal__footer", children: [
-            /* @__PURE__ */ e("div", { className: "rwo-sticky-onboarding-modal__footer__left-section", children: /* @__PURE__ */ e("button", { className: "rwo-ghost-action-button", onClick: () => _ ? _(h) : null, children: f || w }) }),
-            /* @__PURE__ */ e("div", { className: "rwo-sticky-onboarding-modal__footer__right-section", children: h === b.length - 1 ? /* @__PURE__ */ e("button", { className: "rwo-ghost-action-button", onClick: () => x ? x() : null, children: k || y }) : /* @__PURE__ */ e(
+            /* @__PURE__ */ i("div", { className: "rwo-sticky-onboarding-modal__footer__left-section", children: /* @__PURE__ */ i("button", { className: "rwo-ghost-action-button", onClick: () => _ ? _(h) : null, children: f || v }) }),
+            /* @__PURE__ */ i("div", { className: "rwo-sticky-onboarding-modal__footer__right-section", children: h === N.length - 1 ? /* @__PURE__ */ i("button", { className: "rwo-ghost-action-button", onClick: () => b ? b() : null, children: k || y }) : /* @__PURE__ */ i(
               "button",
               {
                 className: "rwo-ghost-action-button",
                 onClick: () => {
                   const n = h + 1;
-                  N(n), s && s(n);
+                  x(n), s && s(n);
                 },
-                children: u || g
+                children: p || w
               }
             ) })
           ] })
         ]
       }
     ) });
-}, G = R;
+}, G = M;
 export {
   V as OnboardingStepSpotlight,
   q as OnboardingWizard,

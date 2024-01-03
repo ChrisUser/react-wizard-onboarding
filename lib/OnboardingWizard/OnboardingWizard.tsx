@@ -42,7 +42,7 @@ const OnboardingWizard: React.FC<Props> = ({
     if (!onboardingSteps || onboardingSteps.length === 0) return
 
     return (
-        <div className="rwo-onboarding-wizard-wrapper">
+        <div className="rwo-onboarding-wizard-wrapper rwo-fixed-onboarding-wizard">
             <div data-testid="wizard" className={`rwo-onboarding-modal ${darkMode ? 'dark' : 'light'}-modal`}>
                 <div className="rwo-onboarding-modal__header">
                     <div className="rwo-onboarding-modal__header__left-section">

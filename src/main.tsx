@@ -7,6 +7,7 @@ import { Dashboard } from './resources/Icons/dashboard'
 import { BulletList } from './resources/Icons/bullet_list'
 import { marketUnits, salesUnits, topCards, users } from './resources/constants'
 import { MoreVertical } from './resources/Icons/more_vert'
+import { OnboardingStepSpotlight, StickyOnboardingWizard } from '../lib/main'
 
 const onboardingSteps = [
     {
@@ -22,29 +23,18 @@ const onboardingSteps = [
     }
 ]
 
-const App = () => {
+const App: React.FC = () => {
     const [bounds, setBounds] = useState<DOMRect>(new DOMRect())
-    const [targetElementRef, setTargetElementRef] = useState<React.MutableRefObject<HTMLDivElement | null>>({ current: null })
-    const sampleDivRef = useRef<HTMLDivElement | null>(null)
-    const secondDivRef = useRef<HTMLDivElement | null>(null)
+    const [targetElementRef, setTargetElementRef] = useState<HTMLDivElement | null>(null)
+    const [showOnboardingElements, setShowOnboardingElements] = useState(true)
+    const elementsRefs = useRef<(HTMLDivElement | null)[]>([])
 
     const getBounds = (step: number) => {
-        if (!sampleDivRef || !sampleDivRef.current || !secondDivRef || !secondDivRef.current) return
-        const divBounds = sampleDivRef.current.getBoundingClientRect()
-        const secDivBounds = secondDivRef.current.getBoundingClientRect()
-        switch (step) {
-            case 1:
-                setBounds(divBounds)
-                setTargetElementRef(sampleDivRef)
-                return
-            case 2:
-                setBounds(secDivBounds)
-                setTargetElementRef(secondDivRef)
-                return
-            case 0:
-            default:
-                setBounds(new DOMRect())
-                setTargetElementRef({ current: null })
+        if (!elementsRefs || !elementsRefs.current || !elementsRefs.current[step]) return
+        const divBounds = elementsRefs.current[step]?.getBoundingClientRect()
+        if (divBounds && elementsRefs.current[step] !== null) {
+            setBounds(divBounds)
+            setTargetElementRef(elementsRefs.current[step])
         }
     }
 
@@ -57,9 +47,19 @@ const App = () => {
                 onboardingSteps={onboardingSteps}
                 onStepChange={(newStep) => getBounds(newStep)}
             /> */}
-            {/* <StickyOnboardingWizard bounds={bounds} darkMode onboardingSteps={onboardingSteps} onStepChange={(newStep) => getBounds(newStep)} /> */}
-            {/* <OnboardingStepSpotlight bounds={bounds} targetRef={targetElementRef} onFocusAnimationEnd={() => console.log('trigger ###')} /> */}
-            <div className="flexbox header-wrapper">
+            {showOnboardingElements && (
+                <>
+                    <StickyOnboardingWizard
+                        bounds={bounds}
+                        onboardingSteps={onboardingSteps}
+                        onStepChange={(newStep) => getBounds(newStep)}
+                        onClose={() => setShowOnboardingElements(false)}
+                        onComplete={() => setShowOnboardingElements(false)}
+                    />
+                    <OnboardingStepSpotlight bounds={bounds} focusedElement={targetElementRef} />
+                </>
+            )}
+            <div className="flexbox header-wrapper" ref={(el) => (elementsRefs.current[0] = el)}>
                 <div className="flexbox header">
                     <div className="flexbox header__left-section">
                         <div className="flexbox main-logo-container">L</div>
@@ -128,12 +128,12 @@ const App = () => {
                         ))}
                     </div>
                     <div className="flexbox items-row">
-                        <div className="flexbox card">
+                        <div className="flexbox card" ref={(el) => (elementsRefs.current[2] = el)}>
                             <div className="flexbox card__title">Market</div>
                             <div className="flexbox card__body">
                                 <div className="flexbox graph-container">
-                                    {marketUnits.map((mUnit) => (
-                                        <div className="graph-bar" style={{ height: `${mUnit}%` }} />
+                                    {marketUnits.map((mUnit, i) => (
+                                        <div key={i} className="graph-bar" style={{ height: `${mUnit}%` }} />
                                     ))}
                                 </div>
                             </div>
@@ -142,8 +142,8 @@ const App = () => {
                             <div className="flexbox card__title">Sales</div>
                             <div className="flexbox card__body">
                                 <div className="flexbox graph-container">
-                                    {salesUnits.map((sUnit) => (
-                                        <div className="graph-bar" style={{ height: `${sUnit}%` }} />
+                                    {salesUnits.map((sUnit, i) => (
+                                        <div key={i} className="graph-bar" style={{ height: `${sUnit}%` }} />
                                     ))}
                                 </div>
                             </div>
@@ -170,47 +170,15 @@ const App = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flexbox items-row">
+                    <div className="flexbox items-row" ref={(el) => (elementsRefs.current[1] = el)}>
                         <button className="appearance-none action-button" onClick={() => window.alert('nothing ...')}>
                             Special Button
                         </button>
                     </div>
                 </div>
             </div>
-
-            {/* <div
-                ref={sampleDivRef}
-                style={{
-                    position: 'absolute',
-                    width: '100%',
-                    height: 110,
-                    transform: 'translate3d(0, 12px, 0px)',
-                    display: 'flex',
-                    flexDirection: 'column-reverse'
-                }}
-            >
-                <h3>Focus qui</h3>
-            </div>
-            <div
-                ref={secondDivRef}
-                style={{
-                    width: 100,
-                    height: 100,
-                    position: 'absolute',
-                    // transform: 'translate3d(92.8125px, 1123.33px, 0px)',
-                    transform: `translate3d(${50}px, ${window.innerWidth - 150}px, 0px)`,
-                    display: 'flex',
-                    flexDirection: 'column-reverse'
-                }}
-            >
-                <h3>Poi qui</h3>
-            </div>*/}
         </div>
     )
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
-)
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />)

@@ -73,7 +73,6 @@
             bottom: $small-space*(-.65)
             border-left: $small-space solid transparent
             border-top: $small-space*1.2 solid
-            border-top-color: inherit
             border-right: $small-space solid transparent
 
     .Bottom--position-modal
@@ -81,7 +80,6 @@
             top: $small-space*(-.65)
             border-left: $small-space solid transparent
             border-bottom: $small-space*1.2 solid
-            border-bottom-color: inherit
             border-right: $small-space solid transparent
 
     .Left--position-modal
@@ -89,7 +87,6 @@
             right: $small-space*(-.65)
             border-top: $small-space solid transparent
             border-left: $small-space*1.2 solid
-            border-left-color: inherit
             border-bottom: $small-space solid transparent
 
     .Right--position-modal
@@ -97,5 +94,40 @@
             left: $small-space*(-.65)
             border-top: $small-space solid transparent
             border-right: $small-space*1.2 solid
-            border-right-color: inherit
             border-bottom: $small-space solid transparent
+
+    // Light modal style
+
+    .Top--position-modal.light-modal
+        &::before
+            border-top-color: $white
+
+    .Bottom--position-modal.light-modal
+        &::before
+            border-bottom-color: $white
+
+    .Left--position-modal.light-modal
+        &::before
+            border-left-color: $white
+
+    .Right--position-modal.light-modal
+        &::before
+            border-right-color: $white
+
+    // Dark modal style
+
+    .Top--position-modal.dark-modal
+        &::before
+            border-top-color: $black
+
+    .Bottom--position-modal.dark-modal
+        &::before
+            border-bottom-color: $black
+
+    .Left--position-modal.dark-modal
+        &::before
+            border-left-color: $black
+
+    .Right--position-modal.dark-modal
+        &::before
+            border-right-color: $black

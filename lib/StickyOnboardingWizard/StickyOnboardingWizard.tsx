@@ -43,6 +43,7 @@ const StickyOnboardingWizard: React.FC<Props> = ({
     useEffect(() => {
         if (!modalRef || !modalRef.current) return
         setModalBounds(modalRef.current.getBoundingClientRect())
+        console.log('rect', modalRef.current.getBoundingClientRect())
     }, [bounds.x, bounds.y, bounds.width, bounds.height, modalRef.current])
 
     /**

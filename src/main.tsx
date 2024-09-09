@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import '../dist/style.css'
 import './pageStyle.css'
@@ -8,6 +8,7 @@ import { BulletList } from './resources/Icons/bullet_list'
 import { marketUnits, salesUnits, topCards, users } from './resources/constants'
 import { MoreVertical } from './resources/Icons/more_vert'
 import { OnboardingStepSpotlight, StickyOnboardingWizard } from '../lib/main'
+import useTutorial, { TutorialProvider, createTutorialConfig } from '../lib/hooks/useTutorial'
 
 const onboardingSteps = [
     {
@@ -29,6 +30,8 @@ const App: React.FC = () => {
     const [showOnboardingElements, setShowOnboardingElements] = useState(true)
     const elementsRefs = useRef<(HTMLDivElement | null)[]>([])
 
+    const { registerTutorialComponent, startTutorial } = useTutorial()
+
     const getBounds = (step: number) => {
         if (!elementsRefs || !elementsRefs.current || !elementsRefs.current[step]) return
         const divBounds = elementsRefs.current[step]?.getBoundingClientRect()
@@ -40,33 +43,15 @@ const App: React.FC = () => {
 
     return (
         <div className="flexbox main-container">
-            {/* <OnboardingWizard
-                completeButtonLabel="Finish"
-                darkMode
-                displayDots
-                onboardingSteps={onboardingSteps}
-                onStepChange={(newStep) => getBounds(newStep)}
-            /> */}
-            {showOnboardingElements && (
-                <>
-                    <StickyOnboardingWizard
-                        bounds={bounds}
-                        onboardingSteps={onboardingSteps}
-                        onStepChange={(newStep) => getBounds(newStep)}
-                        onClose={() => setShowOnboardingElements(false)}
-                        onComplete={() => setShowOnboardingElements(false)}
-                    />
-                    <OnboardingStepSpotlight bounds={bounds} focusedElement={targetElementRef} />
-                </>
-            )}
-            <div className="flexbox header-wrapper" ref={(el) => (elementsRefs.current[0] = el)}>
+            {/** @ts-ignore */}
+            <div className="flexbox header-wrapper" ref={registerTutorialComponent({ position: 2, id: 'header' })}>
                 <div className="flexbox header">
                     <div className="flexbox header__left-section">
                         <div className="flexbox main-logo-container">L</div>
                         <div className="flexbox header-links-container">
-                            <a className="header-links-container__header-link active-link" href="#">
+                            <button style={{ zIndex: 9999999 }} className="header-links-container__header-link active-link" onClick={() => startTutorial()}>
                                 Overview
-                            </a>
+                            </button>
                             <a className="header-links-container__header-link" href="#">
                                 Projects
                             </a>
@@ -181,4 +166,14 @@ const App: React.FC = () => {
     )
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />)
+const config = createTutorialConfig({ sticky: true })
+
+const Setup: React.FC = () => {
+    return (
+        <TutorialProvider config={config}>
+            <App />
+        </TutorialProvider>
+    )
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<Setup />)

@@ -21,8 +21,8 @@ interface Props {
 }
 
 const StickyOnboardingWizard: React.FC<Props> = ({
-    bounds,
-    onboardingSteps,
+    bounds, // remove
+    onboardingSteps, // has to go
     modalTitle = 'Tutorial',
     darkMode,
     nextButtonLabel = 'Next',

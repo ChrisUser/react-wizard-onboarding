@@ -1,5 +1,6 @@
 import React, { ReactNode, useCallback, useContext, useState } from 'react'
 import { useRef } from 'react'
+import { OnboardingWizard, StickyOnboardingWizard } from '../main'
 
 interface TutorialComponentData {
     id: string
@@ -10,6 +11,8 @@ interface TutorialComponentData {
 
 interface TutorialConfiguration {
     sticky?: boolean
+    darkMode?: boolean
+    displayDots?: boolean
 }
 export default function useTutorial() {
     const context = useContext(tutorialContext)
@@ -59,9 +62,10 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
             <>
                 {tutorialInProgress && (
                     <>
+                        <p>Start</p>
                         {/** config.sticky ? (
                             <StickyOnboardingWizard
-                                customModalStyle=""
+                                // customModalStyle=""
                                 bounds={bounds}
                                 onboardingSteps={onboardingSteps}
                                 onStepChange={(newStep) => getBounds(newStep)}

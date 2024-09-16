@@ -166,7 +166,7 @@ const App: React.FC = () => {
     )
 }
 
-const config = createTutorialConfig({ sticky: true })
+const config = createTutorialConfig({ sticky: true, darkMode: true, displayDots: true })
 
 const Setup: React.FC = () => {
     return (

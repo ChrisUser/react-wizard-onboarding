@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useContext, useState } from 'react'
+import React, { ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { OnboardingWizard, StickyOnboardingWizard } from '../main'
 
@@ -26,14 +26,16 @@ const tutorialContext = React.createContext<{
 } | null>(null)
 
 export const createTutorialConfig = (configurations: TutorialConfiguration) => {
-    return { sticky: configurations.sticky ?? false }
+    return { sticky: configurations.sticky ?? false, darkMode: configurations.darkMode ?? false, displayDots: configurations.displayDots ?? false }
 }
 
 export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialConfiguration }> = ({ children, config }) => {
     const elementsRefs = useRef<Map<string, any>>() //<(HTMLDivElement | null)[]>([])
+    const [elementBounds, setElementBounds] = useState<DOMRect[]>([])
     const [tutorialInProgress, setTutorialInProgress] = useState(false)
 
-    function getMap() {
+    const getMap = () => {
+        console.log('one')
         if (!elementsRefs.current) {
             // Initialize the Map on first usage.
             elementsRefs.current = new Map()
@@ -43,6 +45,7 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
 
     const registerTutorialComponent = useCallback((componentData: TutorialComponentData) => {
         return (element: any) => {
+            console.log('two')
             const map = getMap()
             if (element) {
                 map.set(componentData.id, { ...componentData, element })
@@ -53,10 +56,20 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
     }, [])
 
     const startTutorial = () => {
+        console.log('three')
         const map = getMap()
-        console.log([...map.values()].sort((a, b) => (a.position - b.position ? -1 : 1)))
+        const sortedMap = [...map.values()].sort((a, b) => (a.position - b.position ? -1 : 1))
+        console.log('sortedMap', sortedMap)
+        setElementBounds(sortedMap.map((item) => item.element.getBoundingClientRect()))
         setTutorialInProgress(true)
     }
+
+    useEffect(() => {
+        if (elementBounds.length > 0) {
+            console.log('elementBounds', elementBounds)
+        }
+    }, [elementBounds])
+
     return (
         <tutorialContext.Provider value={{ registerTutorialComponent, startTutorial }}>
             <>

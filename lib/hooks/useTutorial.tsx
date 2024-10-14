@@ -1,6 +1,6 @@
 import React, { ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { useRef } from 'react'
-import { OnboardingWizard, StickyOnboardingWizard } from '../main'
+import { OnboardingStepSpotlight, OnboardingWizard, StickyOnboardingWizard } from '../main'
 
 interface TutorialComponentData {
     id: string
@@ -34,8 +34,10 @@ export const createTutorialConfig = (configurations: TutorialConfiguration) => {
 
 export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialConfiguration }> = ({ children, config }) => {
     const elementsRefs = useRef<Map<string, any>>() //<(HTMLDivElement | null)[]>([])
+    const [elements, setElements] = useState<any[]>([])
     const [elementBounds, setElementBounds] = useState<DOMRect[]>([])
     const [tutorialInProgress, setTutorialInProgress] = useState(false)
+    const [currentStepIndex, setCurrentStepIndex] = useState(0)
 
     const getMap = () => {
         console.log('one')
@@ -63,8 +65,10 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
         const map = getMap()
         const sortedMap = [...map.values()].sort((a, b) => (a.position - b.position ? -1 : 1))
         console.log('sortedMap', sortedMap)
+        setElements(sortedMap)
         setElementBounds(sortedMap.map((item) => item.element.getBoundingClientRect()))
         setTutorialInProgress(true)
+        setCurrentStepIndex(0)
     }
 
     useEffect(() => {
@@ -79,25 +83,30 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
                 {tutorialInProgress && (
                     <>
                         <p>Start</p>
-                        {/** config.sticky ? (
+                        {config.sticky ? (
                             <StickyOnboardingWizard
-                                // customModalStyle=""
-                                bounds={bounds}
-                                onboardingSteps={onboardingSteps}
-                                onStepChange={(newStep) => getBounds(newStep)}
-                                onClose={() => setShowOnboardingElements(false)}
-                                onComplete={() => setShowOnboardingElements(false)}
+                                darkMode={config.darkMode}
+                                nextButtonLabel={config.labels?.next}
+                                closeButtonLabel={config.labels?.close}
+                                completeButtonLabel={config.labels?.complete}
+                                bounds={elementBounds[currentStepIndex]}
+                                onboardingSteps={elements}
+                                onStepChange={(newStep) => setCurrentStepIndex(newStep)}
+                                onClose={() => setTutorialInProgress(false)}
+                                onComplete={() => setTutorialInProgress(false)}
                             />
                         ) : (
                             <OnboardingWizard
-                                completeButtonLabel="Finish"
-                                darkMode
-                                displayDots
-                                onboardingSteps={onboardingSteps}
-                                onStepChange={(newStep) => getBounds(newStep)}
+                                completeButtonLabel={config.labels?.complete}
+                                nextButtonLabel={config.labels?.next}
+                                closeButtonLabel={config.labels?.close}
+                                darkMode={config.darkMode}
+                                displayDots={config.displayDots}
+                                onboardingSteps={elements}
+                                onStepChange={(newStep) => setCurrentStepIndex(newStep)}
                             />
-                        ) */}
-                        {/* <OnboardingStepSpotlight bounds={bounds} focusedElement={targetElementRef} />*/}
+                        )}
+                        {<OnboardingStepSpotlight bounds={elementBounds[currentStepIndex]} focusedElement={elements[currentStepIndex].element} />}
                     </>
                 )}
                 {children}

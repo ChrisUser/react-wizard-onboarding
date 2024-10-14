@@ -10,9 +10,12 @@ interface TutorialComponentData {
 }
 
 interface TutorialConfiguration {
+    title?: string
     sticky?: boolean
     darkMode?: boolean
     displayDots?: boolean
+    labels?: { next?: string; complete?: string; close?: string }
+    icons?: { next?: ReactNode; complete?: ReactNode; close?: ReactNode }
 }
 export default function useTutorial() {
     const context = useContext(tutorialContext)

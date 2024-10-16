@@ -5,7 +5,8 @@ import { OnboardingStepSpotlight, OnboardingWizard, StickyOnboardingWizard } fro
 interface TutorialComponentData {
     id: string
     position: number
-    text: string
+    text?: string
+    image?: string
     tutorialKey: string
 }
 
@@ -25,7 +26,7 @@ export default function useTutorial() {
 
 const tutorialContext = React.createContext<{
     registerTutorialComponent: (componentData: TutorialComponentData) => (element: any) => void
-    startTutorial: () => void
+    startTutorial: (tutorialKey?: string) => void
 } | null>(null)
 
 export const createTutorialConfig = (configurations: TutorialConfiguration) => {
@@ -40,7 +41,6 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
     const [currentStepIndex, setCurrentStepIndex] = useState(0)
 
     const getMap = () => {
-        console.log('one')
         if (!elementsRefs.current) {
             // Initialize the Map on first usage.
             elementsRefs.current = new Map()
@@ -50,7 +50,6 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
 
     const registerTutorialComponent = useCallback((componentData: TutorialComponentData) => {
         return (element: any) => {
-            console.log('two')
             const map = getMap()
             if (element) {
                 map.set(componentData.id, { ...componentData, element })
@@ -60,22 +59,30 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
         }
     }, [])
 
-    const startTutorial = () => {
-        console.log('three')
+    const startTutorial = (tutorialKey = '') => {
         const map = getMap()
-        const sortedMap = [...map.values()].sort((a, b) => (a.position - b.position ? -1 : 1))
-        console.log('sortedMap', sortedMap)
-        setElements(sortedMap)
-        setElementBounds(sortedMap.map((item) => item.element.getBoundingClientRect()))
+        if (map.size === 0) {
+            console.warn('No tutorial components registered')
+            return
+        }
+        let finalElementsList = [...map.values()]
+
+        if (tutorialKey) {
+            finalElementsList = finalElementsList.filter((value) => value.tutorialKey === tutorialKey)
+        }
+
+        finalElementsList.sort((a, b) => a.position - b.position)
+        console.log('sortedMap', finalElementsList)
+
+        if (finalElementsList.length === 0) {
+            console.warn('No tutorial components registered for the given tutorial key')
+            return
+        }
+        setElements(finalElementsList)
+        setElementBounds(finalElementsList.map((item) => item.element.getBoundingClientRect()))
         setTutorialInProgress(true)
         setCurrentStepIndex(0)
     }
-
-    useEffect(() => {
-        if (elementBounds.length > 0) {
-            console.log('elementBounds', elementBounds)
-        }
-    }, [elementBounds])
 
     return (
         <tutorialContext.Provider value={{ registerTutorialComponent, startTutorial }}>
@@ -89,6 +96,9 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
                                 nextButtonLabel={config.labels?.next}
                                 closeButtonLabel={config.labels?.close}
                                 completeButtonLabel={config.labels?.complete}
+                                nextButtonIcon={config.icons?.next}
+                                closeButtonIcon={config.icons?.close}
+                                completeButtonIcon={config.icons?.complete}
                                 bounds={elementBounds[currentStepIndex]}
                                 onboardingSteps={elements}
                                 onStepChange={(newStep) => setCurrentStepIndex(newStep)}
@@ -100,10 +110,15 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
                                 completeButtonLabel={config.labels?.complete}
                                 nextButtonLabel={config.labels?.next}
                                 closeButtonLabel={config.labels?.close}
+                                nextButtonIcon={config.icons?.next}
+                                closeButtonIcon={config.icons?.close}
+                                completeButtonIcon={config.icons?.complete}
                                 darkMode={config.darkMode}
                                 displayDots={config.displayDots}
                                 onboardingSteps={elements}
                                 onStepChange={(newStep) => setCurrentStepIndex(newStep)}
+                                onClose={() => setTutorialInProgress(false)}
+                                onComplete={() => setTutorialInProgress(false)}
                             />
                         )}
                         {<OnboardingStepSpotlight bounds={elementBounds[currentStepIndex]} focusedElement={elements[currentStepIndex].element} />}

@@ -4,14 +4,14 @@ export const BulletList: React.FC<{ className: string }> = ({ className }) => {
     // TODO: use it as template for next feature
     // const { registerTutorialComponent, startTutorial } = useTutorial()
     // useEffect(() => startTutorial('firstTutorial', {}))
-    const { registerTutorialComponent, startTutorial } = useTutorial()
+    const { registerTutorialComponent } = useTutorial()
     return (
         <>
             {/** @ts-ignore */}
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className={className}
-                ref={registerTutorialComponent({ position: 1, id: 'bulletList' })}
+                ref={registerTutorialComponent({ position: 1, id: 'bulletList', tutorialKey: 'main_tutorial', text: 'This is a bullet list', image: '' })}
                 viewBox="0 -960 960 960"
             >
                 <path

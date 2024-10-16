@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import ReactDOM from 'react-dom/client'
 import '../dist/style.css'
 import './pageStyle.css'
@@ -7,7 +7,6 @@ import { Dashboard } from './resources/Icons/dashboard'
 import { BulletList } from './resources/Icons/bullet_list'
 import { marketUnits, salesUnits, topCards, users } from './resources/constants'
 import { MoreVertical } from './resources/Icons/more_vert'
-import { OnboardingStepSpotlight, StickyOnboardingWizard } from '../lib/main'
 import useTutorial, { TutorialProvider, createTutorialConfig } from '../lib/hooks/useTutorial'
 
 const onboardingSteps = [
@@ -25,31 +24,29 @@ const onboardingSteps = [
 ]
 
 const App: React.FC = () => {
-    const [bounds, setBounds] = useState<DOMRect>(new DOMRect())
-    const [targetElementRef, setTargetElementRef] = useState<HTMLDivElement | null>(null)
-    const [showOnboardingElements, setShowOnboardingElements] = useState(true)
-    const elementsRefs = useRef<(HTMLDivElement | null)[]>([])
-
     const { registerTutorialComponent, startTutorial } = useTutorial()
-
-    const getBounds = (step: number) => {
-        if (!elementsRefs || !elementsRefs.current || !elementsRefs.current[step]) return
-        const divBounds = elementsRefs.current[step]?.getBoundingClientRect()
-        if (divBounds && elementsRefs.current[step] !== null) {
-            setBounds(divBounds)
-            setTargetElementRef(elementsRefs.current[step])
-        }
-    }
 
     return (
         <div className="flexbox main-container">
-            {/** @ts-ignore */}
-            <div className="flexbox header-wrapper" ref={registerTutorialComponent({ position: 2, id: 'header' })}>
+            <div
+                className="flexbox header-wrapper"
+                ref={registerTutorialComponent({
+                    position: 2,
+                    id: 'header',
+                    tutorialKey: 'main_tutorial',
+                    text: onboardingSteps[0].text,
+                    image: onboardingSteps[0].image
+                })}
+            >
                 <div className="flexbox header">
                     <div className="flexbox header__left-section">
                         <div className="flexbox main-logo-container">L</div>
                         <div className="flexbox header-links-container">
-                            <button style={{ zIndex: 9999999 }} className="header-links-container__header-link active-link" onClick={() => startTutorial()}>
+                            <button
+                                style={{ zIndex: 9999999 }}
+                                className="header-links-container__header-link active-link"
+                                onClick={() => startTutorial('main_tutorial')}
+                            >
                                 Overview
                             </button>
                             <a className="header-links-container__header-link" href="#">
@@ -113,10 +110,19 @@ const App: React.FC = () => {
                         ))}
                     </div>
                     <div className="flexbox items-row">
-                        <div className="flexbox card" ref={(el) => (elementsRefs.current[2] = el)}>
+                        <div className="flexbox card">
                             <div className="flexbox card__title">Market</div>
                             <div className="flexbox card__body">
-                                <div className="flexbox graph-container">
+                                <div
+                                    className="flexbox graph-container"
+                                    ref={registerTutorialComponent({
+                                        position: 3,
+                                        id: 'graph_container',
+                                        tutorialKey: 'graph_tutorial',
+                                        text: onboardingSteps[2].text,
+                                        image: onboardingSteps[2].image
+                                    })}
+                                >
                                     {marketUnits.map((mUnit, i) => (
                                         <div key={i} className="graph-bar" style={{ height: `${mUnit}%` }} />
                                     ))}
@@ -155,7 +161,7 @@ const App: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flexbox items-row" ref={(el) => (elementsRefs.current[1] = el)}>
+                    <div className="flexbox items-row">
                         <button className="appearance-none action-button" onClick={() => window.alert('nothing ...')}>
                             Special Button
                         </button>
@@ -166,7 +172,7 @@ const App: React.FC = () => {
     )
 }
 
-const config = createTutorialConfig({ sticky: true, darkMode: true, displayDots: true })
+const config = createTutorialConfig({ sticky: false, darkMode: true, displayDots: true })
 
 const Setup: React.FC = () => {
     return (

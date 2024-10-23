@@ -39,8 +39,6 @@ const OnboardingStepSpotlight: React.FC<Props> = ({ bounds, focusedElement, befo
         }
     }, [])
 
-    console.log('bounds', bounds)
-
     return (
         <div data-testid="spotlight-wrapper" className="rwo-onboarding-step-spotlight-wrapper">
             <div

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import '../dist/style.css'
 import './pageStyle.css'
@@ -42,11 +42,7 @@ const App: React.FC = () => {
                     <div className="flexbox header__left-section">
                         <div className="flexbox main-logo-container">L</div>
                         <div className="flexbox header-links-container">
-                            <button
-                                style={{ zIndex: 9999999 }}
-                                className="header-links-container__header-link active-link"
-                                onClick={() => startTutorial('main_tutorial')}
-                            >
+                            <button style={{ zIndex: 9999999 }} className="header-links-container__header-link active-link" onClick={() => startTutorial()}>
                                 Overview
                             </button>
                             <a className="header-links-container__header-link" href="#">
@@ -172,7 +168,7 @@ const App: React.FC = () => {
     )
 }
 
-const config = createTutorialConfig({ sticky: false, darkMode: true, displayDots: true })
+const config = createTutorialConfig({ sticky: true, darkMode: true, displayDots: true })
 
 const Setup: React.FC = () => {
     return (

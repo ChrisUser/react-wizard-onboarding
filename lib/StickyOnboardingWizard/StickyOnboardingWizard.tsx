@@ -43,7 +43,6 @@ const StickyOnboardingWizard: React.FC<Props> = ({
     useEffect(() => {
         if (!modalRef || !modalRef.current) return
         setModalBounds(modalRef.current.getBoundingClientRect())
-        console.log('rect', modalRef.current.getBoundingClientRect())
     }, [bounds.x, bounds.y, bounds.width, bounds.height, modalRef.current])
 
     /**
@@ -54,11 +53,6 @@ const StickyOnboardingWizard: React.FC<Props> = ({
         const remainingSpaceRight = window.innerWidth - (bounds.x + bounds.width)
         const remainingSpaceBelow = window.innerHeight - (bounds.y + bounds.height)
 
-        console.log('remainigspace right, below', remainingSpaceRight, remainingSpaceBelow)
-        console.log('modalBounds.height', modalBounds.height)
-        console.log('modalBounds.width', modalBounds.width)
-        console.log('window.innerHeight', window.innerHeight)
-        console.log('window.innerWidth', window.innerWidth)
         if (bounds.height === 0 && bounds.width === 0) {
             return ModalPositions.Center
         }
@@ -85,17 +79,15 @@ const StickyOnboardingWizard: React.FC<Props> = ({
         const { x, y, width, height } = bounds
         const { width: modalWidth, height: modalHeight } = modalBounds
 
-        console.log('getmodalcoordinates width', width)
-
         switch (getModalPosition) {
             case ModalPositions.Top:
-                return `translate3d(${width * 0.5 + x - modalWidth * 0.5 || 0}px, ${Math.abs(y - modalHeight - modalArrowSize)}px, 0px)`
+                return `translate3d(${x + width * 0.5 - modalWidth * 0.5}px, ${y - modalHeight - modalArrowSize}px, 0px)`
             case ModalPositions.Left:
-                return `translate3d(${Math.abs(x - modalWidth - modalArrowSize)}px, ${y || 0}px, 0px)`
+                return `translate3d(${x - modalWidth - modalArrowSize}px, ${y}px, 0px)`
             case ModalPositions.Right:
-                return `translate3d(${x + width + modalArrowSize}px, ${y || 0}px, 0px)`
+                return `translate3d(${x + width + modalArrowSize}px, ${y}px, 0px)`
             case ModalPositions.Bottom:
-                return `translate3d(${x || 0}px, ${y + height + modalArrowSize}px, 0px)`
+                return `translate3d(${x}px, ${y + height + modalArrowSize}px, 0px)`
             case ModalPositions.Center:
             default:
                 return `translate3d(calc(50vw - ${modalWidth * 0.5}px), calc(50vh - ${modalHeight * 0.5}px), 0px)`

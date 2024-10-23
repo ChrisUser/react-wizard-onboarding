@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useContext, useEffect, useState } from 'react'
+import React, { ReactNode, useCallback, useContext, useState } from 'react'
 import { useRef } from 'react'
 import { OnboardingStepSpotlight, OnboardingWizard, StickyOnboardingWizard } from '../main'
 
@@ -72,16 +72,35 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
         }
 
         finalElementsList.sort((a, b) => a.position - b.position)
-        console.log('sortedMap', finalElementsList)
 
         if (finalElementsList.length === 0) {
             console.warn('No tutorial components registered for the given tutorial key')
             return
         }
         setElements(finalElementsList)
-        setElementBounds(finalElementsList.map((item) => item.element.getBoundingClientRect()))
-        setTutorialInProgress(true)
+        const scrollbarWidth = (window.innerWidth - document.documentElement.clientWidth) / 2
+        const scrollbarHeight = (window.innerHeight - document.documentElement.clientHeight) / 2
+        const hasVerticalScrollbar = document.body.scrollHeight > window.innerHeight
+        const hasHorizontalScrollbar = document.body.scrollWidth > window.innerWidth
+        if (hasVerticalScrollbar || hasHorizontalScrollbar) {
+            setElementBounds(
+                finalElementsList.map((item) => {
+                    const bounds: DOMRect = item.element.getBoundingClientRect()
+                    const newRect = {
+                        height: bounds.height,
+                        width: bounds.width,
+                        x: hasVerticalScrollbar ? bounds.x + scrollbarWidth : bounds.x,
+                        y: hasHorizontalScrollbar ? bounds.y + scrollbarHeight : bounds.y
+                    }
+                    return DOMRect.fromRect(newRect)
+                })
+            )
+        } else {
+            setElementBounds(finalElementsList.map((item) => item.element.getBoundingClientRect()))
+        }
+        // setElementBounds(finalElementsList.map((item) => item.element.getBoundingClientRect()))
         setCurrentStepIndex(0)
+        setTutorialInProgress(true)
     }
 
     return (
@@ -89,7 +108,6 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
             <>
                 {tutorialInProgress && (
                     <>
-                        <p>Start</p>
                         {config.sticky ? (
                             <StickyOnboardingWizard
                                 darkMode={config.darkMode}

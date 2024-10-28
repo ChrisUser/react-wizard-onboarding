@@ -9,6 +9,7 @@ interface Props {
     onboardingSteps: OnboardingStep[]
     modalTitle?: string
     darkMode?: boolean
+    hideArrow?: boolean
     nextButtonLabel?: string
     nextButtonIcon?: ReactNode
     closeButtonLabel?: string
@@ -21,10 +22,11 @@ interface Props {
 }
 
 const StickyOnboardingWizard: React.FC<Props> = ({
-    bounds, // remove
-    onboardingSteps, // has to go
+    bounds,
+    onboardingSteps,
     modalTitle = 'Tutorial',
     darkMode,
+    hideArrow,
     nextButtonLabel = 'Next',
     nextButtonIcon,
     closeButtonLabel = 'Close',
@@ -50,22 +52,26 @@ const StickyOnboardingWizard: React.FC<Props> = ({
      * @returns The position of the modal element relative to the target element. Possible values are 'Top', 'Bottom', 'Left', 'Right', or 'Center'.
      */
     const getModalPosition = useMemo((): ModalPositions => {
-        const remainingSpaceRight = window.innerWidth - (bounds.x + bounds.width)
-        const remainingSpaceBelow = window.innerHeight - (bounds.y + bounds.height)
+        const { x, y, width, height } = bounds
+        const { innerWidth, innerHeight } = window
+        const { width: modalWidth, height: modalHeight } = modalBounds
 
-        if (bounds.height === 0 && bounds.width === 0) {
+        const remainingSpaceRight = innerWidth - (x + width)
+        const remainingSpaceBelow = innerHeight - (y + height)
+
+        if (width === 0 && height === 0) {
             return ModalPositions.Center
         }
-        if (modalBounds.height + modalArrowSize <= bounds.y) {
+        if (modalHeight + modalArrowSize <= y) {
             return ModalPositions.Top
         }
-        if (modalBounds.width + modalArrowSize <= bounds.x) {
+        if (modalWidth + modalArrowSize <= x) {
             return ModalPositions.Left
         }
-        if (modalBounds.width + modalArrowSize <= remainingSpaceRight) {
+        if (modalWidth + modalArrowSize <= remainingSpaceRight) {
             return ModalPositions.Right
         }
-        if (modalBounds.height + modalArrowSize <= remainingSpaceBelow) {
+        if (modalHeight + modalArrowSize <= remainingSpaceBelow) {
             return ModalPositions.Bottom
         }
         return ModalPositions.Center
@@ -100,7 +106,9 @@ const StickyOnboardingWizard: React.FC<Props> = ({
         <div className="rwo-onboarding-wizard-wrapper rwo-sticky-onboarding-wizard">
             <div
                 role="dialog"
-                className={`rwo-sticky-onboarding-modal ${darkMode ? 'dark' : 'light'}-modal ${getModalPosition}--position-modal`}
+                className={`rwo-sticky-onboarding-modal ${darkMode ? 'dark' : 'light'}-modal ${getModalPosition}--position-modal ${
+                    hideArrow ? 'hide-arrow' : ''
+                }`}
                 ref={modalRef}
                 style={{
                     transform: getModalCoordinates

@@ -11,14 +11,14 @@ import useTutorial, { TutorialProvider, createTutorialConfig } from '../lib/hook
 
 const onboardingSteps = [
     {
-        text: 'ciao testo 1 prova',
+        text: 'Welcome to the dashboard! Here you can see an overview of your sales, orders, and customers.',
         image: 'https://time.com/wp-content/uploads/2017/10/229-westerlund-21.jpg?w=2000'
     },
     {
-        text: 'ciao testo 2 prova ooook jhgsdfjds fhgjsdf hgjds fghjksfdgjd hjsd fhjksfhdg shdjksgsfhgjsfgjsfhdgkdg jshgjks gh jsdhfj hsdg jhdsfjkghsd jghsdj hdsjgh jksfdhgj hsdjfh jdshgjk hsdfjgkh sjdfhgjs hdfgj dshfjgh jsdhfgj shdgjks hdgkjsfhdjsfh kgj'
+        text: 'jhgsdfjds fhgjsdf hgjds fghjksfdgjd hjsd fhjksfhdg shdjksgsfhgjsfgjsfhdgkdg jshgjks gh jsdhfj hsdg jhdsfjkghsd jghsdj hdsjgh jksfdhgj hsdjfh jdshgjk hsdfjgkh sjdfhgjs hdfgj dshfjgh jsdhfgj shdgjks hdgkjsfhdjsfh kgj'
     },
     {
-        text: 'ok prova 3 testo test',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         image: 'https://time.com/wp-content/uploads/2017/10/229-westerlund-21.jpg?w=2000'
     }
 ]
@@ -88,7 +88,16 @@ const App: React.FC = () => {
                     </div>
                 </div>
                 <div className="flexbox page-body">
-                    <div className="top-page-grid">
+                    <div
+                        className="top-page-grid"
+                        ref={registerTutorialComponent({
+                            position: 4,
+                            id: 'top-page-grid',
+                            tutorialKey: 'main_tutorial',
+                            text: onboardingSteps[2].text,
+                            image: onboardingSteps[2].image
+                        })}
+                    >
                         {topCards.map((topCard) => (
                             <div className="flexbox top-card" key={topCard.id}>
                                 <div className="flexbox top-card__left">
@@ -168,7 +177,7 @@ const App: React.FC = () => {
     )
 }
 
-const config = createTutorialConfig({ sticky: true, darkMode: true, displayDots: true })
+const config = createTutorialConfig({ sticky: true, darkMode: true, displayDots: true, hideArrowOnSticky: true })
 
 const Setup: React.FC = () => {
     return (

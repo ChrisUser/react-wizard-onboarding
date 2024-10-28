@@ -13,6 +13,7 @@ interface TutorialComponentData {
 interface TutorialConfiguration {
     title?: string
     sticky?: boolean
+    hideArrowOnSticky?: boolean
     darkMode?: boolean
     displayDots?: boolean
     labels?: { next?: string; complete?: string; close?: string }
@@ -30,7 +31,14 @@ const tutorialContext = React.createContext<{
 } | null>(null)
 
 export const createTutorialConfig = (configurations: TutorialConfiguration) => {
-    return { sticky: configurations.sticky ?? false, darkMode: configurations.darkMode ?? false, displayDots: configurations.displayDots ?? false }
+    return {
+        sticky: configurations.sticky ?? false,
+        darkMode: configurations.darkMode ?? false,
+        displayDots: configurations.displayDots ?? false,
+        hideArrowOnSticky: configurations.hideArrowOnSticky ?? false,
+        labels: configurations.labels ?? { next: 'Next', complete: 'Complete', close: 'Close' },
+        icons: configurations.icons ?? { next: null, complete: null, close: null }
+    }
 }
 
 export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialConfiguration }> = ({ children, config }) => {
@@ -98,7 +106,6 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
         } else {
             setElementBounds(finalElementsList.map((item) => item.element.getBoundingClientRect()))
         }
-        // setElementBounds(finalElementsList.map((item) => item.element.getBoundingClientRect()))
         setCurrentStepIndex(0)
         setTutorialInProgress(true)
     }
@@ -117,6 +124,7 @@ export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialC
                                 nextButtonIcon={config.icons?.next}
                                 closeButtonIcon={config.icons?.close}
                                 completeButtonIcon={config.icons?.complete}
+                                hideArrow={config.hideArrowOnSticky}
                                 bounds={elementBounds[currentStepIndex]}
                                 onboardingSteps={elements}
                                 onStepChange={(newStep) => setCurrentStepIndex(newStep)}

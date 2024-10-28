@@ -49,6 +49,13 @@
         &__footer
             +flexbox(space-between, center, row, nowrap)
 
+    .Top--position-modal.hide-arrow,
+    .Bottom--position-modal.hide-arrow,
+    .Left--position-modal.hide-arrow,
+    .Right--position-modal.hide-arrow
+        &::before
+            display: none !important
+
     .Top--position-modal,
     .Bottom--position-modal,
     .Left--position-modal,

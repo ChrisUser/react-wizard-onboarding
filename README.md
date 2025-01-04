@@ -2,11 +2,46 @@
 
 Pretty fancy onboarding wizard for your website, made in React.
 
+# Installation
+
+Install via npm
+
+```sh
+npm install --save react-wizard-onboarding
+```
+
+or yarn
+
+```sh
+yarn add react-wizard-onboarding
+```
+
 # Usage
+
+1. Wrap your app inside the `<TutorialProvider>` context.
+
+### Example
+
+```typescript
+const config = createTutorialConfig({ sticky: true, darkMode: true, displayDots: true, hideArrowOnSticky: true })
+
+const Setup: React.FC = () => {
+    return (
+        <TutorialProvider config={config}>
+            <App />
+        </TutorialProvider>
+    )
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<Setup />)
+```
 
 # Props
 
 # Contribute
+
+If you have a suggestion that would improve this component feel free to fork the project and open a pull request or create an issue for any idea or bug you find.\
+Remeber to follow the [Contributing Guidelines](https://github.com/ChrisUser/.github/blob/main/CONTRIBUTING.md).
 
 # License
 

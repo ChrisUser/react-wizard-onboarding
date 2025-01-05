@@ -36,6 +36,38 @@ const Setup: React.FC = () => {
 ReactDOM.createRoot(document.getElementById('root')!).render(<Setup />)
 ```
 
+2. Register all the elements of a page to include them into the onboarding carousel.
+
+### Example
+
+```typescript
+const { registerTutorialComponent, startTutorial } = useTutorial()
+...
+
+return (
+    <div className="main-container">
+        <header
+            ref={registerTutorialComponent({
+                position: 1,
+                id: 'header',
+                tutorialKey: 'main_tutorial',
+                text: 'This is the header element...'
+            })}
+        >
+    ...
+)
+```
+
+3. Call the startTutorial method from useTutorial hook anywhere in the page (eg. with an onClick or a useEffect).
+
+### Example
+
+```html
+    <button onClick={() => startTutorial()}>
+        Start
+    </button>
+```
+
 # Props
 
 # Contribute

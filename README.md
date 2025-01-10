@@ -71,10 +71,19 @@ return (
 # Hooks
 
 -   `registerTutorialComponent: (componentData: TutorialComponentData)` Registers a tutorial component to be highlighted during the onboarding steps.
-
 -   `startTutorial: (tutorialKey?: string)` Starts the tutorial onboarding process. You can also specify which tutorial to start. If not specified, all the previously registered components will be highlighted during the onboarding process.
 
 # Props
+
+### `TutorialComponentData`
+
+| Name        | Optional | Type     | Description                                          |
+| ----------- | -------- | -------- | ---------------------------------------------------- |
+| id          |          | `string` | Component key or identifier                          |
+| position    |          | `number` | Component chapter position in the onboarding wizard  |
+| tutorialKey |          | `string` | Identifier of the onboarding tutorial chapters group |
+| text        | ✔️       | `string` | Onboarding chapter text                              |
+| iamge       | ✔️       | `string` | Onboarding chapter image                             |
 
 # Contribute
 

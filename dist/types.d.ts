@@ -9,7 +9,3 @@ export declare enum ModalPositions {
     Right = "Right",
     Center = "Center"
 }
-export interface OnboardingStep {
-    text: string;
-    image?: string;
-}

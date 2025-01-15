@@ -5,6 +5,7 @@ interface Props {
     onboardingSteps: OnboardingStep[];
     modalTitle?: string;
     darkMode?: boolean;
+    hideArrow?: boolean;
     nextButtonLabel?: string;
     nextButtonIcon?: ReactNode;
     closeButtonLabel?: string;

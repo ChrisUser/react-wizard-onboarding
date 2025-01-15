@@ -15,7 +15,7 @@ const onboardingSteps = [
         image: 'https://time.com/wp-content/uploads/2017/10/229-westerlund-21.jpg?w=2000'
     },
     {
-        text: 'jhgsdfjds fhgjsdf hgjds fghjksfdgjd hjsd fhjksfhdg shdjksgsfhgjsfgjsfhdgkdg jshgjks gh jsdhfj hsdg jhdsfjkghsd jghsdj hdsjgh jksfdhgj hsdjfh jdshgjk hsdfjgkh sjdfhgjs hdfgj dshfjgh jsdhfgj shdgjks hdgkjsfhdjsfh kgj'
+        text: 'This is the header section. You can navigate through the different sections of the dashboard using the links on the left. You can also search for specific items using the search bar.'
     },
     {
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -42,8 +42,8 @@ const App: React.FC = () => {
                     <div className="flexbox header__left-section">
                         <div className="flexbox main-logo-container">L</div>
                         <div className="flexbox header-links-container">
-                            <button style={{ zIndex: 9999999 }} className="header-links-container__header-link active-link" onClick={() => startTutorial()}>
-                                Overview
+                            <button style={{ zIndex: 9999999 }} className="appearance-none action-button highlighted-button" onClick={() => startTutorial()}>
+                                Start onboarding tutorial
                             </button>
                             <a className="header-links-container__header-link" href="#">
                                 Projects

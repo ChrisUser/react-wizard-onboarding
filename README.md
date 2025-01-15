@@ -1,6 +1,8 @@
-# react-wizard-onboarding
+# React Wizard Onboarding
 
 Pretty fancy onboarding wizard for your website, made in React.
+
+![React Wizard Onboarding](readme-header-img.png)
 
 # Installation
 
@@ -75,7 +77,7 @@ return (
 
 # Props
 
-### `TutorialComponentData`
+### `TutorialComponentData` connect a component to the onboarding process
 
 | Name        | Optional | Type     | Description                                          |
 | ----------- | -------- | -------- | ---------------------------------------------------- |
@@ -85,10 +87,16 @@ return (
 | text        | ✔️       | `string` | Onboarding chapter text                              |
 | iamge       | ✔️       | `string` | Onboarding chapter image                             |
 
-# Contribute
+### `TutorialConfiguration` configure the onboarding wizard UI
 
-If you have a suggestion that would improve this component feel free to fork the project and open a pull request or create an issue for any idea or bug you find.\
-Remeber to follow the [Contributing Guidelines](https://github.com/ChrisUser/.github/blob/main/CONTRIBUTING.md).
+| Name        | Optional | Type                                                            | Description                                                                      |
+| ----------- | -------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| title       | ✔️       | `string`                                                        | Onboarding process title                                                         |
+| sticky      | ✔️       | `boolean`                                                       | Determines if the wizard should stick to the registered components at each step. |
+| darkMode    | ✔️       | `boolean`                                                       | Enables dark theme mode.                                                         |
+| displayDots | ✔️       | `boolean`                                                       | Determines if page dots should be displayed in default mode (non-sticky).        |
+| labels      | ✔️       | `{ next?: string; complete?: string; close?: string }`          | Custom labels for the wizard buttons.                                            |
+| icons       | ✔️       | `{ next?: ReactNode; complete?: ReactNode; close?: ReactNode }` | Custom icons for the wizard buttons.                                             |
 
 # License
 

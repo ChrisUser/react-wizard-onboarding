@@ -363,6 +363,10 @@ body {
     width: 6rem;
 }
 
+.highlighted-button {
+    background-color: violet !important;
+}
+
 .action-button {
     cursor: pointer;
     background-color: var(--darkest-bg-color);

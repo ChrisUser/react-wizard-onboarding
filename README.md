@@ -94,7 +94,7 @@ return (
 | title       | ✔️       | `string`                                                        | Onboarding process title                                                         |
 | sticky      | ✔️       | `boolean`                                                       | Determines if the wizard should stick to the registered components at each step. |
 | darkMode    | ✔️       | `boolean`                                                       | Enables dark theme mode.                                                         |
-| displayDots | ✔️       | `boolean`                                                       | Determines if page dots should be displayed in default mode (non-sticky).        |
+| displayDots | ✔️       | `boolean`                                                       | Determines if page dots should be displayed in default mode (non-sticky only).   |
 | labels      | ✔️       | `{ next?: string; complete?: string; close?: string }`          | Custom labels for the wizard buttons.                                            |
 | icons       | ✔️       | `{ next?: ReactNode; complete?: ReactNode; close?: ReactNode }` | Custom icons for the wizard buttons.                                             |
 

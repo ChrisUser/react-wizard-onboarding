@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import '../dist/main.css'
 import './pageStyle.css'
 import { Notifications } from './resources/Icons/notifications'
 import { Dashboard } from './resources/Icons/dashboard'

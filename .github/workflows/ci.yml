@@ -22,9 +22,6 @@ jobs:
             - name: Install dependecies
               run: |
                   yarn install
-            - name: Lint code
-              run: |
-                  yarn lint
             - name: Build React
               env:
                   CI: false

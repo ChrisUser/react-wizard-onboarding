@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { default as React, ReactNode } from 'react';
 import { OnboardingStep } from '../types';
 interface Props {
     onboardingSteps: OnboardingStep[];

@@ -42,7 +42,7 @@ export const createTutorialConfig = (configurations: TutorialConfiguration) => {
 }
 
 export const TutorialProvider: React.FC<{ children: ReactNode; config: TutorialConfiguration }> = ({ children, config }) => {
-    const elementsRefs = useRef<Map<string, any>>() //<(HTMLDivElement | null)[]>([])
+    const elementsRefs = useRef<Map<string, any>>(new Map()) //<(HTMLDivElement | null)[]>([])
     const [elements, setElements] = useState<any[]>([])
     const [elementBounds, setElementBounds] = useState<DOMRect[]>([])
     const [tutorialInProgress, setTutorialInProgress] = useState(false)

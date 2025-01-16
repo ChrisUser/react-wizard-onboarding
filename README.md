@@ -4,6 +4,8 @@ Pretty fancy onboarding wizard for your website, made in React.
 
 ![React Wizard Onboarding](readme-header-img.png)
 
+Live **demo** at [https://chrisuser.github.io/react-wizard-onboarding](https://chrisuser.github.io/react-wizard-onboarding/).
+
 # Installation
 
 Install via npm

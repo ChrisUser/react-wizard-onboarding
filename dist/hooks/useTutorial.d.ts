@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { default as React, ReactNode } from 'react';
 interface TutorialComponentData {
     id: string;
     position: number;
@@ -25,7 +25,7 @@ interface TutorialConfiguration {
 }
 export default function useTutorial(): {
     registerTutorialComponent: (componentData: TutorialComponentData) => (element: any) => void;
-    startTutorial: (tutorialKey?: string | undefined) => void;
+    startTutorial: (tutorialKey?: string) => void;
 };
 export declare const createTutorialConfig: (configurations: TutorialConfiguration) => {
     sticky: boolean;
@@ -33,9 +33,9 @@ export declare const createTutorialConfig: (configurations: TutorialConfiguratio
     displayDots: boolean;
     hideArrowOnSticky: boolean;
     labels: {
-        next?: string | undefined;
-        complete?: string | undefined;
-        close?: string | undefined;
+        next?: string;
+        complete?: string;
+        close?: string;
     };
     icons: {
         next?: ReactNode;

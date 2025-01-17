@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './pageStyle.css'
+import '../lib/styles/main.sass'
 import { Notifications } from './resources/Icons/notifications'
 import { Dashboard } from './resources/Icons/dashboard'
 import { BulletList } from './resources/Icons/bullet_list'
